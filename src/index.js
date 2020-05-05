@@ -30,25 +30,35 @@ const createEndpoint = (healthFunction, {
   path = '/health',
   timeout,
 } = {}) => {
+  // creating the check function to include the timeout if needed
   const checkFunction = async () => {
     if (timeout) return Promise.race([healthFunction(), timeoutPromise(timeout)]);
     return healthFunction();
   };
+
+  // prevent missing leading / in path
   const serverPath = path.startsWith('/') ? path : `/${path}`;
 
+  // creating the http server
   const server = http.createServer(async (req, res) => {
     // If request has the wrong path return 404
     if (req.url !== serverPath) {
       res.writeHead(404);
       res.end();
     }
+
     let healthResult = null;
     let error = null;
+
+    // get the status from the check function and catch an error
     try {
       healthResult = await checkFunction();
     } catch (e) {
       error = e;
     }
+
+    // determine the needed http status code and status,
+    // starting with fail and set to pass or warn is approptiate
     let statusCode = 500;
     let status = 'fail';
     if (!error && (healthResult === true || healthResult === 'pass')) {
@@ -59,22 +69,28 @@ const createEndpoint = (healthFunction, {
       statusCode = 200;
     }
 
+    // set the http status code and a header for the content type
     res.writeHead(statusCode, {
       'Content-Type': 'application/health+json',
     });
+
+    // set up the payload with at leat the status key + additional keys from options.
     const payload = {
       status,
       ...serviceId && { serviceId },
       ...version && { version },
       ...releaseId && { releaseId },
       ...description && { description },
-      ...error && !hideError && { output: error.message },
+      ...error && !hideError && { output: error.message }, // only added if hideError = false
     };
+    // sned the response
     res.end(JSON.stringify(payload), 'utf8');
   });
 
+  // starting the server on the given port
   server.listen(port);
 
+  // returning an object with the close function to shut the server down
   return {
     close() {
       return new Promise((resolve, reject) => {
