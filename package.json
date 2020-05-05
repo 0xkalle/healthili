@@ -4,7 +4,7 @@
   "description": "Standalone and simple, zero dependencies health check endpoint.",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha --slow 0 --recursive -t 20000 --exit",
+    "test": "nyc mocha --slow 0 --recursive -t 20000 --exit",
     "lint": "eslint '**/*.js'"
   },
   "author": "Karl-Heinz Wallwitz",
