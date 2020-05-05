@@ -108,6 +108,7 @@ The default options object.
 
 ### HealthiliEndpoint.close()
 * Returns: `Promise`
+  
 In case you need to close the server `.close()` can be called on the HealthiliEndpoint. It uses `server.close()` in the background. This will stop the server from accepting new connections, but not close open connections. In case there are open connections, it will wait for them to close.
 
 ## Not implemented
