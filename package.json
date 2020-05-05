@@ -1,12 +1,18 @@
 {
   "name": "healthili",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Standalone and simple, zero dependencies health check endpoint.",
   "main": "src/index.js",
   "scripts": {
     "test": "nyc mocha --slow 0 --recursive -t 20000 --exit",
     "lint": "eslint '**/*.js'"
   },
+  "keywords": [
+    "healthcheck",
+    "health",
+    "check",
+    "endpoint"
+  ],
   "author": "Karl-Heinz Wallwitz",
   "license": "MIT",
   "devDependencies": {
