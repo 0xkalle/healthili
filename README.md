@@ -1,6 +1,6 @@
 # healthili
 
-healthili is a simple, standalone and zero dependencies health check endpoint. If you have a worker service which does not expose a http API anyways but you need this tiny health check endpoint for your k8s / ec2 / fargate etc. healthili is for you.
+healthili is a simple, standalone and zero dependencies health check endpoint. If you have a worker service which does not expose a http API anyways, but you want to use a HTTP health check endpoint for your k8s / ec2 / fargate etc. healthili is for you.
 
 Healthili is compliant with the IETF Draft [Health Check Response Format for HTTP APIs](https://tools.ietf.org/html/draft-inadarei-api-health-check-04).
 
@@ -111,6 +111,7 @@ The default options object.
   
 In case you need to close the server `.close()` can be called on the HealthiliEndpoint. It uses `server.close()` in the background. This will stop the server from accepting new connections, but not close open connections. In case there are open connections, it will wait for them to close.
 
-## Not implemented
+## Todo
 * optional [`checks` object](https://tools.ietf.org/html/draft-inadarei-api-health-check-04#section-3.6) is not included in the response, as it would add a lot of complexity.
 * optional [`links` key](https://tools.ietf.org/html/draft-inadarei-api-health-check-04#section-3.7) is not included in the response, as it would add a lot of complexity.
+* partial health checks?
