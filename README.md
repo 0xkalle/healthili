@@ -13,28 +13,28 @@ const healthEndpoint = healthili.createEndpoint(() => true);
 
 This will create a simple http server listening on port `3000` with the health endpoint at `/health`. If the health function given to `createEndpoint` returns `true` or `"pass"` the endpoint will return a `200 OK` with a minimal payload:
 
-```json
+```js
 // 200
 {
-  "status": "pass", 
+  status: 'pass', 
 }
 ```
 
 If the health function returns `false` or `"fail"` it will return apropriate respond. If the function throws an error it will also include it's message by default:
 
-```json
+```js
 // 500
 {
-  "status": "fail",
-  "output": "Message of the error", // only included if the health function throws an error
+  status: 'fail',
+  output: 'Message of the error', // only included if the health function throws an error
 }
 ```
 
 If the health function returns `warn` it will return a warning:
-```json
+```js
 // 200
 {
-  "status": "warn",
+  status: 'warn',
 }
 ```
 
@@ -57,14 +57,14 @@ const healthEndpoint = healthili.createEndpoint(myHealthFunc, {
 This will result in a server listening on port `1234` with the the health endpoint at path `/happy`. The status will be determined by the `myHealthFunc` function. If the `myHealthFunc` function needs longer then `5000` ms to return the healthcheck will fail. The endpoint will not return errors messages in the output key of the response.
 
 **Example fail response:**
-```json
+```js
 // 500
 {
-  "status": "fail",
-  "description": "My cool service.",
-  "serviceId": "1337r2d2",
-  "version": 13,
-  "releaseId": "1.0.1",
+  status: 'fail',
+  description: 'My cool service.',
+  serviceId: '1337r2d2',
+  version: 13,
+  releaseId: '1.0.1',
 }
 ```
 
