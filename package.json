@@ -1,6 +1,6 @@
 {
   "name": "healthili",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Standalone and simple, zero dependencies health check endpoint.",
   "main": "src/index.js",
   "scripts": {
@@ -23,6 +23,10 @@
     "mocha": "^7.1.2",
     "node-fetch": "^2.6.0",
     "nyc": "^15.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/0xkalle/healthili.git"
   },
   "dependencies": {}
 }
